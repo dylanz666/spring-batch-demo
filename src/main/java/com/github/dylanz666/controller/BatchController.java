@@ -17,10 +17,6 @@ public class BatchController {
     @Autowired
     private Job singleStepJob;
     @Autowired
-    private Job multiStepsJob;
-    @Autowired
-    private Job multiProcessorStepJob;
-    @Autowired
     private JobLauncher jobLauncher;
 
     @GetMapping("/job/step")
@@ -28,22 +24,6 @@ public class BatchController {
         JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis())
                 .toJobParameters();
         jobLauncher.run(singleStepJob, jobParameters);
-        return "The single step job is proceed.";
-    }
-
-    @GetMapping("/job/steps")
-    public String invokeSteps() throws Exception {
-        JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis())
-                .toJobParameters();
-        jobLauncher.run(multiStepsJob, jobParameters);
-        return "The multi steps job is proceed.";
-    }
-
-    @GetMapping("/job/test/step")
-    public String invokeTestSteps() throws Exception {
-        JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis())
-                .toJobParameters();
-        jobLauncher.run(multiProcessorStepJob, jobParameters);
-        return "The multi processors single step job is proceed.";
+        return "The job is proceed.";
     }
 }
