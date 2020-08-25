@@ -13,7 +13,7 @@ public class ItemReaderService implements ItemReader {
     private String[] message = {"message 1", "message 2", "message 3", "message 4", "message 5"};
     private int count = 0;
 
-    public String read() throws Exception{
+    public String read() throws Exception {
         if (count < message.length) {
             return message[count++];
         }
