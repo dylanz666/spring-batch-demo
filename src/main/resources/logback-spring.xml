@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <contextName>logback</contextName>
+    <!-- 定义日志的根目录 -->
+    <property name="LOG_PATH" value="logs"/>
+    <property name="LOG_ARCHIVE" value="${LOG_PATH}/archive"/>
+
+    <!--输出到控制台，即：ConsoleAppender-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <withJansi>true</withJansi>
+        <encoder>
+            <!--格式化输出：
+            %d:表示日期
+            %thread:表示线程名
+            %-5level:级别从左显示5个字符宽度
+            %msg:日志消息
+            %n:是换行符-->
+            <pattern>%red([%d{yyyy-MM-dd HH:mm:ss}]) %green([ %thread ]) %highlight([ %-5level ]) %boldMagenta([ %logger ]) - %cyan(%msg%n)
+            </pattern>
+            <charset>GBK</charset>
+        </encoder>
+        <!--日志过滤器，如配置则只有被配置的类型才会被记录下来-->
+        <!--<filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>-->
+    </appender>
+
+    <!--输出到文件，即：RollingFileAppender-->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_PATH}/current.log</File>
+        <!--TimeBasedRollingPolicy： 最常用的滚动策略，它根据时间来制定滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_ARCHIVE}/app.%d.%i.log.gz</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!--文件达到最大10MB时会被压缩和切割-->
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}] [ %thread ] [ %-5level ] [ %logger ] - %msg%n</pattern>
+            <charset>GBK</charset>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </root>
+
+    <!--<logger name="com.mycompany.sample.service.LeadService" level="warn">
+        <appender-ref ref="file"/>
+    </logger>-->
+</configuration>
