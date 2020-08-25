@@ -44,6 +44,6 @@ public class BatchController {
         JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis())
                 .toJobParameters();
         jobLauncher.run(multiProcessorStepJob, jobParameters);
-        return "The multi processor step job is proceed.";
+        return "The multi processors single step job is proceed.";
     }
 }
