@@ -3,7 +3,6 @@ package com.github.dylanz666;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author : dylanz
@@ -11,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication
 @EnableBatchProcessing
-@EnableScheduling
+//@EnableScheduling
 public class App {
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
