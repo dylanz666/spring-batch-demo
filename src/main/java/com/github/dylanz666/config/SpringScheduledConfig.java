@@ -19,7 +19,7 @@ public class SpringScheduledConfig {
     @Autowired
     private JobLauncher jobLauncher;
 
-    @Scheduled(cron = "1/5 * * * * ?")
+    @Scheduled(cron = "0/5 * * * * ?")
     public void demoScheduled() throws Exception {
         JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis())
                 .toJobParameters();
