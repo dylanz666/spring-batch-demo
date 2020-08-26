@@ -36,5 +36,4 @@ public class BatchController {
         jobLauncher.run(multiBoundStepsJob, jobParameters);
         return "The multi bound steps job is proceed.";
     }
-
 }
