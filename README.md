@@ -1,2 +1,2 @@
-# spring-boot-batch-demo
-spring-boot-batch-demo
+# spring-batch-demo
+spring-batch-demo
